@@ -1,0 +1,44 @@
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.2.30'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    version = "1.8.9"
+    tweakClass = "cc.hyperium.launch.HyperiumTweaker"
+    mappings = "stable_20"
+    runDir = 'run'
+    makeObfSourceJar = true
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+     compile 'com.github.HyperiumClient:Hyperium:master-SNAPSHOT'
+     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
